@@ -26,7 +26,7 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/member/login.do")
 	public String loginview() {
-		
+		// 로그인 페이지 이동
 		return "member/login";
 	}
 	
