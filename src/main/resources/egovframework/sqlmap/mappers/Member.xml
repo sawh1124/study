@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member">
+
+<!-- 	<resultMap id="sample" type="project2.fwd.service.SampleVO"> -->
+<!-- 		<result property="id" column="id"/> -->
+<!-- 		<result property="name" column="name"/> -->
+<!-- 		<result property="description" column="description"/> -->
+<!-- 		<result property="useYn" column="use_yn"/> -->
+<!-- 		<result property="regUser" column="reg_user"/> -->
+<!-- 	</resultMap> -->
+<resultMap id="MemberBeanMap" type="egovframework.member.bean.MemberBean">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="nickname" column="nickname"/>
+		<result property="email" column="email"/>
+		<result property="createdAt" column="createdAt"/>
+		<result property="birth" column="birth"/>
+		<result property="addr" column="addr"/>
+		<result property="mobile" column="mobile"/>
+		<result property="gender" column="gender"/>
+	</resultMap>
+
+
+	<insert id="insertMember">
+		insert into member(id,pass,name,nickname,email,createdAt,birth,addr,mobile,gender)
+		values(#{id},#{pass},#{name},#{nickname},#{email},now(),#{birth},#{addr},#{mobile},#{gender})
+	</insert>
+	
+	<update id="updateMember">
+		update member set name=#{name}, nickname=#{nickname}, email=#{email}, updatedAt=now(), birth=#{birth}, mobile=#{mobile}, gender=#{gender} where id=#{id}
+	</update>
+	
+	<select id="selectLogin" resultType="int">
+		select count(id) from member
+		where id = #{id}
+		and pass = #{pass}
+	</select>
+	
+	<select id="joinIdCheck" resultType="int">
+		select count(id) from member
+		where id = #{id}
+	</select>
+	
+	<select id="selectMemberOne" resultMap="MemberBeanMap">
+		select id, name, nickname, email, createdAt, birth, addr, mobile, gender from member
+		where id = #{id}
+	</select>
+</mapper>
