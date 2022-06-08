@@ -21,7 +21,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/main.do")
 	public String main() {
-		
+		// 메인 페이지 이동
 		return "main/main";
 	}
 	@RequestMapping(value = "/member/login.do")
